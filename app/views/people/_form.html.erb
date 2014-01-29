@@ -1,0 +1,104 @@
+<%= form_for(@person) do |f| %>
+  <% if @person.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
+
+      <ul>
+      <% @person.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<!--
+#FIXME
+Add code such that:
+	1. admin users can see and update the "admin" field but regular users cannot.
+-->
+
+<!-- This is hideous code by DRY standards, but I can't figure out how to fix it.
+#FIXME
+Clean this up when I figure out how to. 
+--> 
+
+  <div class="field">
+    <%= f.label :name, '* Username' %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :secret, '* Secret (password)' %><br />
+    <%= f.password_field :secret %>
+  </div>
+  <div class="field">
+    <%= f.label :email, '* Email address' %><br />
+    <%= f.text_field :email %>
+  </div>
+  
+  <p>We will never share your email address without your explicit consent. This is only to provide password resets and account verification.</p>
+  
+  <div class="field">
+    <%= f.label :description, 'Description' %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :birthday, 'Birthday' %><br />
+    <%= f.date_select :birthday, :discard_year => true%>
+  </div>
+  
+  <p>Please select your negative triggers from the list below. (There is planned future functionality to allow you to see book suggestions that do not contain these items, although it is not currently available and this is optional.)</p>
+  
+<!--
+#FIXME
+Can this entire block be abstracted out into a separate partial without having to have a second submit button, which might be confusing for users? If so, do this and then use it everywhere.
+-->  
+  
+  <div class="field">
+  	<%= f.label :general_audiences, 'General Audiences' %>
+  	<%= f.check_box :general_audiences %>
+  </div>
+  <div class="field">
+  	<%= f.label :teen_up, 'Teen and Up Audiences' %>
+  	<%= f.check_box :teen_up %>
+  </div>
+  <div class="field">
+  	<%= f.label :mature, 'Mature Audiences' %>
+  	<%= f.check_box :mature %>
+  </div>
+  <div class="field">
+  	<%= f.label :explicit, 'Explicit' %>
+  	<%= f.check_box :explicit %>
+  </div>
+  <div class="field">
+  	<%= f.label :graphic_violence, 'Graphic Violence' %>
+  	<%= f.check_box :graphic_violence %>
+  </div>
+  <div class="field">
+  	<%= f.label :major_character_death, 'Major Character Death' %>
+  	<%= f.check_box :major_character_death %>
+  </div>
+  <div class="field">
+  	<%= f.label :character_death, 'Character Death' %>
+  	<%= f.check_box :character_death %>
+  </div>
+	<div class="field">
+  	<%= f.label :sex, 'Sex' %>
+  	<%= f.check_box :sex %>
+  </div>
+  <div class="field">
+  	<%= f.label :rape, 'Rape' %>
+  	<%= f.check_box :rape %>
+  </div>
+	<div class="field">
+  	<%= f.label :abuse, 'Abuse' %>
+  	<%= f.check_box :abuse %>
+  </div>
+  <div class="field">
+  	<%= f.label :child_abuse, 'Child Abuse' %>
+  	<%= f.check_box :child_abuse %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

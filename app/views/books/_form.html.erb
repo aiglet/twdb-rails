@@ -1,0 +1,113 @@
+<%= form_for(@book, :html => { :multipart => true}) do |f| %>
+  <% if @book.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+
+      <ul>
+      <% @book.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<p>Basic book information (items with * are required):</p>
+
+  <div class="field">
+    <%= f.label :title, '* Title' %><br />
+    <%= f.text_field :title %>
+  </div>
+
+<!-- 
+#FIXME
+Consider doing something to break this up into author first/last, first/second author, etc.
+-->
+
+  <div class="field">
+    <%= f.label :author, '* Author' %><br />
+    <%= f.text_field :author %>
+  </div>
+  <div class="field">
+    <%= f.label :pub_date, 'Publication Year' %><br />
+    <%= f.date_select :pub_date, :discard_day => true, :discard_month => true, :start_year => 1900, :end_year => 2014 %>
+  </div>
+  <div class="field">
+    <%= f.label :ISBN, '* ISBN'%><br />
+    <%= f.text_field :ISBN %>
+  </div>
+<p>Please enter the ISBN as either 10 or 13 numbers without the dashes. If your book has a 9-digit ISBN, please enter 0 as the first number.</p>
+
+<!--
+#FIXME
+Put in "no ISBN" indicator somehow. Don't forget to put the "unless" validator in the model.
+-->
+
+
+  <div class="field">
+    <%= f.label :description, 'Summary/Back Cover Text' %><br />
+    <%= f.text_area :description %>
+  </div>
+
+	<div class="field">
+		<%= f.label :cover %><br />
+		<%= f.file_field :cover %>
+	</div>
+	
+<p>Right now we can only support one cover image per book, so please use the best one you have!</p>
+  
+<p>Please select the appropriate boxes below. Since this app is currently very stupid, please select all appropriate boxes (e.g., "Major Character Death" is also "Character Death" - please tick both, until I can write some logic to do it for you).</p>  
+  
+<!--
+#FIXME
+Can this entire block be abstracted out into a separate partial without having to have a second submit button, which might be confusing for users? If so, do this and then use it everywhere.
+-->
+  
+  <div class="field">
+  	<%= f.label :general_audiences, 'General Audiences' %>
+  	<%= f.check_box :general_audiences %>
+  </div>
+  <div class="field">
+  	<%= f.label :teen_up, 'Teen and Up Audiences' %>
+  	<%= f.check_box :teen_up %>
+  </div>
+  <div class="field">
+  	<%= f.label :mature, 'Mature Audiences' %>
+  	<%= f.check_box :mature %>
+  </div>
+  <div class="field">
+  	<%= f.label :explicit, 'Explicit' %>
+  	<%= f.check_box :explicit %>
+  </div>
+	<div class="field">
+  	<%= f.label :graphic_violence, 'Graphic Violence' %>
+  	<%= f.check_box :graphic_violence %>
+  </div>
+	<div class="field">
+  	<%= f.label :major_character_death, 'Major Character Death' %>
+  	<%= f.check_box :major_character_death %>
+  </div>
+  <div class="field">
+  	<%= f.label :character_death, 'Character Death' %>
+  	<%= f.check_box :character_death %>
+  </div>
+  <div class="field">
+  	<%= f.label :sex, 'Sex' %>
+  	<%= f.check_box :sex %>
+  </div>
+  <div class="field">
+  	<%= f.label :rape, 'Rape' %>
+  	<%= f.check_box :rape %>
+  </div>
+  <div class="field">
+  	<%= f.label :abuse, 'Abuse' %>
+  	<%= f.check_box :abuse %>
+  </div>
+  <div class="field">
+  	<%= f.label :child_abuse, 'Child Abuse' %>
+  	<%= f.check_box :child_abuse %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

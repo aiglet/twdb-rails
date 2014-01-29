@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<!--
+#FIXME
+Add code so that:
+	1. generic users can only see their own profiles.
+	2. admin users can see all profiles
+-->
+
+<p>
+  <b>Name:</b>
+  <%= @person.name %>
+</p>
+
+<p>
+  <b>Secret:</b>
+  <%= @person.secret %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @person.email %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @person.description %>
+</p>
+
+<p>
+  <b>Birthday:</b>
+  <%= @person.birthday %>
+</p>
+
+
+<%= link_to 'Edit', edit_person_path(@person) %> |
+<%= link_to 'Back', people_path %>

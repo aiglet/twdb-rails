@@ -1,0 +1,14 @@
+<h1>Editing person</h1>
+
+<%= render 'form' %>
+
+<!--
+#FIXME
+Add code so that:
+	1. generic users can only edit their own profiles
+	2. add "remove account" option for generic users (i.e., destroy)
+	3. admin users can edit any profile
+-->
+
+<%= link_to 'Show', @person %> |
+<%= link_to 'Back', people_path %>
